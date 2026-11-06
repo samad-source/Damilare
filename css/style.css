@@ -1846,3 +1846,29 @@ footer {
     }
 
 }
+
+
+/* Homepage profile photograph */
+
+.hero-photo {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--mint);
+}
+
+.profile-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: inherit;
+}
+
+.photo-decoration {
+    z-index: 2;
+    pointer-events: none;
+}
