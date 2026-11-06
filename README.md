@@ -1,4 +1,4 @@
-# Akinlami Damilare Moses — Personal Portfolio
+# Akinlami Damilare Moses - Personal Portfolio
 
 A personal portfolio website showcasing my background, professional experience, academic journey, projects, and continuous development in Data Science.
 
