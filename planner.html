@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Academic Planner | Akinlami Damilare Moses</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="header">
+        <nav class="navbar container">
+
+            <a href="index.html" class="logo">
+                Damilare<span>.</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="planner.html" class="active">Planner</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- Academic Planner -->
+    <main>
+
+        <section class="section container">
+
+            <div class="section-heading">
+
+                <p class="eyebrow">STAY ORGANIZED</p>
+
+                <h1>Academic <span>Planner</span></h1>
+
+                <p>
+                    Keep track of your academic responsibilities.
+                    Add your tasks, mark completed activities,
+                    and stay organized.
+                </p>
+
+            </div>
+
+
+            <!-- Task Input -->
+            <div class="academic-planner">
+
+                <form id="taskForm" class="planner-form">
+
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="Enter your academic task..."
+                        required
+                    >
+
+                    <button type="submit" class="button button-primary">
+                        Add Task
+                    </button>
+
+                </form>
+
+
+                <!-- Task List -->
+                <div class="planner-content">
+
+                    <h2>My Tasks</h2>
+
+                    <ul id="taskList" class="task-list">
+
+                        <!-- Tasks will appear here -->
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>
+                © <span id="year"></span> Akinlami Damilare Moses.
+                All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
