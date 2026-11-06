@@ -1,110 +1,128 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An academic planner for organising tasks and tracking progress.">
 
     <title>Academic Planner | Akinlami Damilare Moses</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
-
+    <script src="js/script.js" defer></script>
 </head>
-
 <body>
 
-    <!-- Navigation -->
-    <header class="header">
-        <nav class="navbar container">
+<header class="site-header">
+    <div class="container nav-wrap">
+        <a href="index.html" class="brand">
+            <span class="brand-mark">DM</span>
+            <span>Akinlami Damilare</span>
+        </a>
 
-            <a href="index.html" class="logo">
-                Damilare<span>.</span>
-            </a>
+        <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+        </button>
 
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Me</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="planner.html" class="active">Planner</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="planner.html" class="active">Planner</a>
+            <a href="contact.html" class="nav-contact">Contact</a>
         </nav>
-    </header>
+    </div>
+</header>
 
+<main>
+    <section class="page-hero">
+        <div class="container">
+            <p class="eyebrow">STAY ORGANised</p>
+            <h1>Plan your work.<br><span class="text-green">Track your progress.</span></h1>
+            <p class="page-intro">
+                A simple academic task planner to help organise learning,
+                manage responsibilities, and stay consistent.
+            </p>
+        </div>
+    </section>
 
-    <!-- Academic Planner -->
-    <main>
+    <section class="section">
+        <div class="container planner-container">
 
-        <section class="section container">
-
-            <div class="section-heading">
-
-                <p class="eyebrow">STAY ORGANIZED</p>
-
-                <h1>Academic <span>Planner</span></h1>
-
-                <p>
-                    Keep track of your academic responsibilities.
-                    Add your tasks, mark completed activities,
-                    and stay organized.
-                </p>
-
+            <div class="planner-heading">
+                <div>
+                    <p class="eyebrow">MY TASK BOARD</p>
+                    <h2>Academic planner</h2>
+                    <p>Small steps every day lead to meaningful progress.</p>
+                </div>
             </div>
 
+            <div class="planner-stats">
+                <div class="stat-card">
+                    <span class="stat-label">TOTAL TASKS</span>
+                    <strong id="taskCount">0</strong>
+                </div>
 
-            <!-- Task Input -->
-            <div class="academic-planner">
+                <div class="stat-card">
+                    <span class="stat-label">COMPLETED</span>
+                    <strong id="completedCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">REMAINING</span>
+                    <strong id="remainingCount">0</strong>
+                </div>
+            </div>
+
+            <div class="planner-card">
+                <h3>Add a new task</h3>
+                <p>Write down something you need to accomplish.</p>
 
                 <form id="taskForm" class="planner-form">
-
                     <input
                         type="text"
                         id="taskInput"
-                        placeholder="Enter your academic task..."
+                        placeholder="e.g. Study Numerical Analysis"
+                        aria-label="Enter a task"
                         required
                     >
 
-                    <button type="submit" class="button button-primary">
-                        Add Task
+                    <button type="submit" class="btn btn-primary">
+                        Add task +
                     </button>
-
                 </form>
 
-
-                <!-- Task List -->
-                <div class="planner-content">
-
-                    <h2>My Tasks</h2>
-
-                    <ul id="taskList" class="task-list">
-
-                        <!-- Tasks will appear here -->
-
-                    </ul>
-
+                <div class="task-section-heading">
+                    <h3>Your tasks</h3>
+                    <span id="taskSummary">0 tasks</span>
                 </div>
 
+                <ul id="taskList" class="task-list"></ul>
+
+                <p id="emptyMessage" class="empty-message">
+                    No tasks yet. Add your first task to get started.
+                </p>
             </div>
 
-        </section>
-
-    </main>
-
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>
-                © <span id="year"></span> Akinlami Damilare Moses.
-                All rights reserved.
+            <p class="planner-note">
+                Your tasks are saved in this browser using local storage.
             </p>
+
         </div>
-    </footer>
+    </section>
+</main>
 
-
-    <script src="js/script.js"></script>
+<footer class="site-footer">
+    <div class="container footer-content">
+        <p>© <span class="year"></span> Akinlami Damilare Moses.</p>
+        <p>Learning today. Building for tomorrow.</p>
+    </div>
+</footer>
 
 </body>
-
 </html>
