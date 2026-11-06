@@ -1,91 +1,100 @@
 
 /* =========================================
-   1. FOOTER YEAR
+   AKINLAMI DAMILARE MOSES — PORTFOLIO
+   Main JavaScript
 ========================================= */
 
-document.querySelectorAll(".year").forEach((element) => {
-    element.textContent = new Date().getFullYear();
-});
+document.addEventListener("DOMContentLoaded", () => {
 
+    /* =====================================
+       1. MOBILE NAVIGATION
+    ===================================== */
 
-/* =========================================
-   2. MOBILE NAVIGATION
-========================================= */
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mainNav = document.querySelector(".main-nav");
 
-const menuToggle = document.querySelector(".menu-toggle");
-const mainNav = document.querySelector(".main-nav");
+    if (menuToggle && mainNav) {
 
-if (menuToggle && mainNav) {
+        menuToggle.addEventListener("click", () => {
+            const isOpen = mainNav.classList.toggle("open");
 
-    function closeMenu() {
-        mainNav.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open navigation");
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            menuToggle.setAttribute(
+                "aria-label",
+                isOpen ? "Close navigation menu" : "Open navigation menu"
+            );
+        });
+
+        // Close menu after clicking a navigation link
+        mainNav.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                mainNav.classList.remove("open");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Open navigation menu");
+            });
+        });
+
+        // Close menu when clicking outside it
+        document.addEventListener("click", event => {
+            const clickedInsideNav = mainNav.contains(event.target);
+            const clickedToggle = menuToggle.contains(event.target);
+
+            if (!clickedInsideNav && !clickedToggle) {
+                mainNav.classList.remove("open");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Open navigation menu");
+            }
+        });
+
+        // Close menu with Escape key
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") {
+                mainNav.classList.remove("open");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Open navigation menu");
+            }
+        });
+
+        // Reset mobile menu when returning to desktop layout
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 700) {
+                mainNav.classList.remove("open");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Open navigation menu");
+            }
+        });
     }
 
-    menuToggle.addEventListener("click", () => {
-        const isOpen = mainNav.classList.toggle("open");
 
-        menuToggle.setAttribute("aria-expanded", String(isOpen));
-        menuToggle.setAttribute(
-            "aria-label",
-            isOpen ? "Close navigation" : "Open navigation"
-        );
+    /* =====================================
+       2. AUTOMATIC FOOTER YEAR
+    ===================================== */
+
+    document.querySelectorAll(".year").forEach(element => {
+        element.textContent = new Date().getFullYear();
     });
 
-    // Close the menu after selecting a page.
-    mainNav.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", closeMenu);
-    });
 
-    // Close the menu when the Escape key is pressed.
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-            closeMenu();
-        }
-    });
+    /* =====================================
+       3. PERSONAL TASK PLANNER
+    ===================================== */
 
-    // Close the menu when clicking outside it.
-    document.addEventListener("click", (event) => {
-        const clickedInsideMenu = mainNav.contains(event.target);
-        const clickedToggle = menuToggle.contains(event.target);
-
-        if (!clickedInsideMenu && !clickedToggle) {
-            closeMenu();
-        }
-    });
-
-    // Close mobile menu if the browser is resized to desktop width.
-    window.addEventListener("resize", () => {
-        if (window.innerWidth > 700) {
-            closeMenu();
-        }
-    });
-}
-
-
-/* =========================================
-   3. ACADEMIC PLANNER
-========================================= */
-
-const taskForm = document.getElementById("taskForm");
-
-if (taskForm) {
-
+    const taskForm = document.getElementById("taskForm");
     const taskInput = document.getElementById("taskInput");
     const taskList = document.getElementById("taskList");
-    const emptyMessage = document.getElementById("emptyMessage");
 
     const taskCount = document.getElementById("taskCount");
     const completedCount = document.getElementById("completedCount");
     const remainingCount = document.getElementById("remainingCount");
+
+    const emptyMessage = document.getElementById("emptyMessage");
     const taskSummary = document.getElementById("taskSummary");
 
-    const STORAGE_KEY = "damilare_academic_tasks";
+    const STORAGE_KEY = "akinlamiPortfolioTasks";
 
     let tasks = [];
 
-    // Load saved tasks safely.
+    // Load previously saved tasks safely
     try {
         const savedTasks = localStorage.getItem(STORAGE_KEY);
 
@@ -93,7 +102,7 @@ if (taskForm) {
             const parsedTasks = JSON.parse(savedTasks);
 
             if (Array.isArray(parsedTasks)) {
-                tasks = parsedTasks.filter((task) =>
+                tasks = parsedTasks.filter(task =>
                     task &&
                     typeof task.id === "string" &&
                     typeof task.text === "string" &&
@@ -102,58 +111,58 @@ if (taskForm) {
             }
         }
     } catch (error) {
-        console.error("Could not load saved tasks:", error);
+        console.error("Unable to load saved tasks:", error);
         tasks = [];
     }
 
-    // Save tasks to the browser.
+    // Save tasks to browser storage
     function saveTasks() {
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
         } catch (error) {
-            console.error("Could not save tasks:", error);
-            alert("Your browser could not save the tasks. Check your browser storage settings.");
+            console.error("Unable to save tasks:", error);
+
+            if (taskSummary) {
+                taskSummary.textContent =
+                    "Your browser could not save the tasks. Check your storage settings.";
+            }
         }
     }
 
-    // Update the planner statistics.
-    function updateStatistics() {
+    // Update task statistics
+    function updateTaskStats() {
         const total = tasks.length;
-
-        const completed = tasks.filter(
-            (task) => task.completed
-        ).length;
-
+        const completed = tasks.filter(task => task.completed).length;
         const remaining = total - completed;
 
-        if (taskCount) {
-            taskCount.textContent = total;
-        }
+        if (taskCount) taskCount.textContent = total;
+        if (completedCount) completedCount.textContent = completed;
+        if (remainingCount) remainingCount.textContent = remaining;
 
-        if (completedCount) {
-            completedCount.textContent = completed;
-        }
-
-        if (remainingCount) {
-            remainingCount.textContent = remaining;
+        if (emptyMessage) {
+            emptyMessage.style.display = total === 0 ? "block" : "none";
         }
 
         if (taskSummary) {
-            taskSummary.textContent =
-                total === 1 ? "1 task" : `${total} tasks`;
-        }
-
-        if (emptyMessage) {
-            emptyMessage.hidden = total > 0;
+            if (total === 0) {
+                taskSummary.textContent = "Your task list is currently empty.";
+            } else if (remaining === 0) {
+                taskSummary.textContent = "Excellent! You have completed all your tasks.";
+            } else {
+                taskSummary.textContent =
+                    `You have ${remaining} task${remaining === 1 ? "" : "s"} remaining.`;
+            }
         }
     }
 
-    // Display all tasks.
+    // Display tasks on the page
     function renderTasks() {
+
+        if (!taskList) return;
 
         taskList.replaceChildren();
 
-        tasks.forEach((task) => {
+        tasks.forEach(task => {
 
             const listItem = document.createElement("li");
             listItem.className = "task-item";
@@ -162,168 +171,139 @@ if (taskForm) {
                 listItem.classList.add("completed");
             }
 
-            const leftContainer = document.createElement("div");
-            leftContainer.className = "task-item-left";
+            // Task text
+            const taskText = document.createElement("span");
+            taskText.className = "task-text";
+            taskText.textContent = task.text;
 
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.className = "task-checkbox";
-            checkbox.checked = task.completed;
-            checkbox.setAttribute(
+            // Task actions
+            const actions = document.createElement("div");
+            actions.className = "task-actions";
+
+            // Complete button
+            const completeButton = document.createElement("button");
+            completeButton.type = "button";
+            completeButton.className = "task-complete";
+            completeButton.textContent = task.completed ? "Undo" : "Complete";
+            completeButton.setAttribute(
                 "aria-label",
-                `Mark ${task.text} as completed`
+                task.completed
+                    ? `Mark ${task.text} as incomplete`
+                    : `Mark ${task.text} as complete`
             );
 
-            checkbox.addEventListener("change", () => {
-                task.completed = checkbox.checked;
-
+            completeButton.addEventListener("click", () => {
+                task.completed = !task.completed;
                 saveTasks();
                 renderTasks();
             });
 
-            const taskText = document.createElement("span");
-            taskText.textContent = task.text;
-
-            leftContainer.appendChild(checkbox);
-            leftContainer.appendChild(taskText);
-
+            // Delete button
             const deleteButton = document.createElement("button");
             deleteButton.type = "button";
-            deleteButton.className = "delete-task";
+            deleteButton.className = "task-delete";
             deleteButton.textContent = "Delete";
             deleteButton.setAttribute(
                 "aria-label",
-                `Delete task: ${task.text}`
+                `Delete ${task.text}`
             );
 
             deleteButton.addEventListener("click", () => {
-
-                tasks = tasks.filter(
-                    (item) => item.id !== task.id
-                );
-
+                tasks = tasks.filter(item => item.id !== task.id);
                 saveTasks();
                 renderTasks();
             });
 
-            listItem.appendChild(leftContainer);
-            listItem.appendChild(deleteButton);
-
+            actions.append(completeButton, deleteButton);
+            listItem.append(taskText, actions);
             taskList.appendChild(listItem);
         });
 
-        updateStatistics();
+        updateTaskStats();
     }
 
-    // Add a new task.
-    taskForm.addEventListener("submit", (event) => {
+    // Add a new task
+    if (taskForm && taskInput && taskList) {
 
-        event.preventDefault();
+        taskForm.addEventListener("submit", event => {
+            event.preventDefault();
 
-        const taskText = taskInput.value.trim();
+            const taskText = taskInput.value.trim();
 
-        if (!taskText) {
+            if (!taskText) {
+                taskInput.focus();
+                return;
+            }
+
+            const newTask = {
+                id: window.crypto?.randomUUID
+                    ? window.crypto.randomUUID()
+                    : `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+                text: taskText,
+                completed: false
+            };
+
+            tasks.unshift(newTask);
+
+            saveTasks();
+            renderTasks();
+
+            taskForm.reset();
             taskInput.focus();
-            return;
-        }
+        });
 
-        const newTask = {
-            id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
-            text: taskText,
-            completed: false
-        };
-
-        tasks.push(newTask);
-
-        saveTasks();
+        // Display saved tasks when the page loads
         renderTasks();
-
-        taskForm.reset();
-        taskInput.focus();
-    });
-
-    // Display saved tasks when the page opens.
-    renderTasks();
-}
+    }
 
 
-/* =========================================
-   4. CONTACT FORM
-========================================= */
+    /* =====================================
+       4. CONTACT FORM
+    ===================================== */
 
-const contactForm = document.getElementById("contactForm");
+    const contactForm = document.getElementById("contactForm");
 
-if (contactForm) {
+    if (contactForm) {
 
-    contactForm.addEventListener("submit", (event) => {
+        contactForm.addEventListener("submit", event => {
+            event.preventDefault();
 
-        event.preventDefault();
+            const name = document.getElementById("contactName")?.value.trim();
+            const email = document.getElementById("contactEmail")?.value.trim();
+            const subject = document.getElementById("contactSubject")?.value.trim();
+            const message = document.getElementById("contactMessage")?.value.trim();
 
-        const name = document.getElementById("contactName").value.trim();
-        const email = document.getElementById("contactEmail").value.trim();
-        const subject = document.getElementById("contactSubject").value.trim();
-        const message = document.getElementById("contactMessage").value.trim();
+            if (!name || !email || !subject || !message) {
+                alert("Please complete all the fields before continuing.");
+                return;
+            }
 
-        // Make sure all fields contain information.
-        if (!name || !email || !subject || !message) {
-            alert("Please complete all the fields.");
-            return;
-        }
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        // Validate the email address.
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
 
-        if (!emailPattern.test(email)) {
-            alert("Please enter a valid email address.");
-            return;
-        }
+            const recipient = "damilareakinlami@gmail.com";
 
-        const recipient = "damilareakinlami@gmail.com";
+            const emailSubject = encodeURIComponent(subject);
 
-        const emailSubject = encodeURIComponent(subject);
+            const emailBody = encodeURIComponent(
+                `Hello Damilare,
 
-        const emailBody = encodeURIComponent(
-            `Hello Damilare,
+${message}
 
-            ${message}
+Best regards,
+${name}
+${email}`
+            );
 
-            Regards,
-            ${name}
+            const mailtoLink =
+                `mailto:${recipient}?subject=${emailSubject}&body=${emailBody}`;
 
-            Sender email: ${email}`
-        );
+            window.location.href = mailtoLink;
+        });
+    }
 
-        const mailtoLink =
-            `mailto:${recipient}?subject=${emailSubject}&body=${emailBody}`;
-
-        // Open the visitor's default email application.
-        window.location.href = mailtoLink;
-
-    });
-}
-
-
-/* =========================================
-   5. IMAGE PLACEHOLDER SUPPORT
-========================================= */
-
-// Allow placeholder elements to display a real photo
-// when a data-image attribute is added to them.
-
-document.querySelectorAll("[data-image]").forEach((element) => {
-
-    const imagePath = element.dataset.image;
-
-    if (!imagePath) return;
-
-    const image = document.createElement("img");
-
-    image.src = imagePath;
-    image.alt = element.dataset.alt || "Portfolio photograph";
-
-    image.addEventListener("error", () => {
-        console.error("Could not load image:", imagePath);
-    });
-
-    element.replaceChildren(image);
 });

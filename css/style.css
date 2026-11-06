@@ -1349,3 +1349,500 @@ p {
         padding: 24px;
     }
 }
+
+
+/* =========================================
+   RESPONSIVE HOMEPAGE & FINAL POLISH
+========================================= */
+
+/* Homepage learning status */
+
+.learning-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    color: var(--muted);
+    font-size: 13px;
+    flex-wrap: wrap;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Hero photo */
+
+.hero-photo {
+    position: relative;
+    overflow: visible;
+}
+
+.photo-decoration {
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    right: -20px;
+    bottom: -20px;
+    border: 1px solid var(--green);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Approach list */
+
+.approach-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 25px;
+}
+
+.approach-list li {
+    list-style: none;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* Homepage introduction cards */
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.intro-card {
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    transition: transform var(--transition),
+                box-shadow var(--transition);
+}
+
+.intro-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.intro-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 20px;
+    background: var(--mint);
+    color: var(--green);
+    border-radius: 12px;
+    font-size: 20px;
+}
+
+/* Perspective section */
+
+.perspective-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.perspective-note {
+    padding: 35px;
+    background: var(--mint);
+    border-radius: var(--radius);
+}
+
+.perspective-mark {
+    color: var(--green);
+    font-size: 55px;
+    line-height: 1;
+}
+
+/* Footer brand */
+
+.footer-brand {
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    color: var(--ink);
+}
+
+/* =========================================
+   ABOUT PAGE POLISH
+========================================= */
+
+.about-profile-layout {
+    display: grid;
+    grid-template-columns: minmax(250px, .8fr) 1.2fr;
+    gap: 55px;
+    align-items: start;
+}
+
+.about-profile-image {
+    position: relative;
+    min-width: 0;
+}
+
+.about-profile-image .photo-placeholder {
+    width: 100%;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--mint);
+    border-radius: var(--radius);
+}
+
+.about-profile-content {
+    min-width: 0;
+}
+
+.profile-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.timeline {
+    position: relative;
+    display: grid;
+    gap: 30px;
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--line);
+}
+
+.timeline-date,
+.experience-date {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.timeline-content,
+.experience-card {
+    min-width: 0;
+}
+
+.timeline-role {
+    color: var(--green);
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.experience-list {
+    display: grid;
+    gap: 20px;
+}
+
+.experience-card {
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.experience-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.experience-index {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.experience-points {
+    padding-left: 20px;
+    margin-top: 18px;
+}
+
+.experience-points li {
+    margin-bottom: 10px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.interest-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.interest-tags span {
+    padding: 9px 14px;
+    background: var(--mint);
+    color: var(--green-dark);
+    border-radius: 30px;
+    font-size: 13px;
+}
+
+.language-panel {
+    padding: 25px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+/* =========================================
+   ACCESSIBILITY & INTERACTION
+========================================= */
+
+button,
+a,
+input,
+textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+    touch-action: manipulation;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--green);
+    outline-offset: 4px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+input,
+textarea,
+button {
+    font: inherit;
+}
+
+textarea {
+    resize: vertical;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.container,
+section,
+header,
+footer {
+    min-width: 0;
+}
+
+/* =========================================
+   TABLET RESPONSIVENESS
+========================================= */
+
+@media (max-width: 900px) {
+
+    .intro-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-profile-layout {
+        grid-template-columns: 1fr 1.3fr;
+        gap: 30px;
+    }
+
+    .perspective-layout {
+        gap: 25px;
+    }
+
+    .timeline-item {
+        grid-template-columns: 110px 1fr;
+        gap: 18px;
+    }
+
+}
+
+/* =========================================
+   MOBILE NAVIGATION
+========================================= */
+
+@media (max-width: 700px) {
+
+    .header-inner {
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        cursor: pointer;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+    }
+
+    .main-nav.open {
+        display: flex;
+    }
+
+    .main-nav a {
+        display: block;
+        width: 100%;
+        padding: 14px;
+    }
+
+    /* Hero */
+
+    .hero,
+    .hero-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-photo {
+        max-width: 420px;
+        margin: 25px auto 0;
+    }
+
+    .photo-decoration {
+        right: -8px;
+    }
+
+    /* Layouts */
+
+    .intro-grid,
+    .perspective-layout,
+    .about-profile-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .about-profile-image {
+        max-width: 420px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .about-profile-image .photo-placeholder {
+        min-height: 280px;
+    }
+
+    .profile-details {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .approach-list {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .experience-heading {
+        flex-wrap: wrap;
+    }
+
+}
+
+/* =========================================
+   SMALL MOBILE SCREENS
+========================================= */
+
+@media (max-width: 480px) {
+
+    .container {
+        width: min(100% - 32px, 1120px);
+    }
+
+    h1 {
+        font-size: clamp(2rem, 10vw, 3rem);
+        line-height: 1.15;
+    }
+
+    h2 {
+        font-size: clamp(1.5rem, 7vw, 2.2rem);
+    }
+
+    .intro-card,
+    .experience-card,
+    .perspective-note {
+        padding: 22px;
+    }
+
+    .profile-details {
+        grid-template-columns: 1fr;
+    }
+
+    .learning-status {
+        font-size: 12px;
+    }
+
+    .interest-tags {
+        gap: 8px;
+    }
+
+    .interest-tags span {
+        font-size: 12px;
+        padding: 8px 11px;
+    }
+
+    .experience-heading {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .photo-decoration {
+        width: 55px;
+        height: 55px;
+    }
+
+    button,
+    .btn {
+        max-width: 100%;
+    }
+
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
